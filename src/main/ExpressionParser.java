@@ -50,12 +50,17 @@ class ExpressionParser {
             errorMessage = "Выражение начинается с оператора";
             isAllOk = false;
         }
-        if(!isDelimiter(curr))
-        try {
-            Double.parseDouble(curr); //если операнд не число
-        } catch (NumberFormatException e) {
-            errorMessage = "Введено не число";
-            isAllOk = false;
+        if(!isDelimiter(curr)) {
+            try {
+                Double.parseDouble(curr); //если операнд не число
+            } catch (NumberFormatException e) {
+                errorMessage = "Введено не число";
+                isAllOk = false;
+            }
+            if(curr.length() > 308) {
+                errorMessage = "Число слишком большое";
+                isAllOk = false;
+            }
         }
     }
 
